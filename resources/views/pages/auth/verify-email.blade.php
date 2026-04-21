@@ -1,28 +1,37 @@
 <x-layouts::auth :title="__('Email verification')">
-    <div class="mt-4 flex flex-col gap-6">
-        <flux:text class="text-center">
-            {{ __('Please verify your email address by clicking on the link we just emailed to you.') }}
-        </flux:text>
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="mb-5">
+                <h2 class="text-primary f-w-600">{{ __('Email verification') }}</h2>
+                <p>{{ __('Please verify your email address by clicking on the link we just emailed to you.') }}</p>
+            </div>
+        </div>
 
         @if (session('status') == 'verification-link-sent')
-            <flux:text class="text-center font-medium !dark:text-green-400 !text-green-600">
+        <div class="col-12">
+            <div class="alert alert-success text-center">
                 {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-            </flux:text>
+            </div>
+        </div>
         @endif
 
-        <div class="flex flex-col items-center justify-between space-y-3">
-            <form method="POST" action="{{ route('verification.send') }}">
+        <div class="col-12 mt-3">
+            <form method="POST" action="{{ route('verification.send') }}" class="app-form">
                 @csrf
-                <flux:button type="submit" variant="primary" class="w-full">
-                    {{ __('Resend verification email') }}
-                </flux:button>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                        {{ __('Resend verification email') }}
+                    </button>
+                </div>
             </form>
 
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="POST" action="{{ route('logout') }}" class="app-form">
                 @csrf
-                <flux:button variant="ghost" type="submit" class="text-sm cursor-pointer" data-test="logout-button">
-                    {{ __('Log out') }}
-                </flux:button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-link link-secondary text-sm">
+                        {{ __('Log out') }}
+                    </button>
+                </div>
             </form>
         </div>
     </div>

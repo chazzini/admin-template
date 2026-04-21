@@ -1,67 +1,81 @@
 <x-layouts::auth :title="__('Register')">
-    <div class="flex flex-col gap-6">
-        <x-auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
-
-        <!-- Session Status -->
-        <x-auth-session-status class="text-center" :status="session('status')" />
-
-        <form method="POST" action="{{ route('register.store') }}" class="flex flex-col gap-6">
-            @csrf
-            <!-- Name -->
-            <flux:input
-                name="name"
-                :label="__('Name')"
-                :value="old('name')"
-                type="text"
-                required
-                autofocus
-                autocomplete="name"
-                :placeholder="__('Full name')"
-            />
-
-            <!-- Email Address -->
-            <flux:input
-                name="email"
-                :label="__('Email address')"
-                :value="old('email')"
-                type="email"
-                required
-                autocomplete="email"
-                placeholder="email@example.com"
-            />
-
-            <!-- Password -->
-            <flux:input
-                name="password"
-                :label="__('Password')"
-                type="password"
-                required
-                autocomplete="new-password"
-                :placeholder="__('Password')"
-                viewable
-            />
-
-            <!-- Confirm Password -->
-            <flux:input
-                name="password_confirmation"
-                :label="__('Confirm password')"
-                type="password"
-                required
-                autocomplete="new-password"
-                :placeholder="__('Confirm password')"
-                viewable
-            />
-
-            <div class="flex items-center justify-end">
-                <flux:button type="submit" variant="primary" class="w-full" data-test="register-user-button">
-                    {{ __('Create account') }}
-                </flux:button>
+    <form method="POST" action="{{ route('register.store') }}" class="app-form">
+        @csrf
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-5 text-center text-lg-start">
+                    <h2 class="text-primary f-w-600">{{ __('Create Account') }}</h2>
+                    <p>{{ __('Get Started For Free Today!') }}</p>
+                </div>
             </div>
-        </form>
-
-        <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
-            <span>{{ __('Already have an account?') }}</span>
-            <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="name" class="form-label">{{ __('Name') }}</label>
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" 
+                           placeholder="{{ __('Enter Your Name') }}" id="name" value="{{ old('name') }}" required autofocus autocomplete="name">
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="email" class="form-label">{{ __('Email') }}</label>
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
+                           placeholder="{{ __('Enter Your Email') }}" id="email" value="{{ old('email') }}" required autocomplete="email">
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="password" class="form-label">{{ __('Password') }}</label>
+                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" 
+                           placeholder="{{ __('Enter Your Password') }}" id="password" required autocomplete="new-password">
+                    @error('password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="password_confirmation" class="form-label">{{ __('Confirm Password') }}</label>
+                    <input type="password" name="password_confirmation" class="form-control" 
+                           placeholder="{{ __('Confirm Your Password') }}" id="password_confirmation" required autocomplete="new-password">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="d-flex justify-content-between gap-3">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="terms" id="checkDefault" required>
+                        <label class="form-check-label text-secondary" for="checkDefault">
+                            {{ __('Accept Terms & Conditions') }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary w-100">{{ __('Sign Up') }}</button>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="text-center text-lg-start">
+                    {{ __('Already Have An Account?') }} 
+                    <a href="{{ route('login') }}" class="link-primary text-decoration-underline">{{ __('Sign in') }}</a>
+                </div>
+            </div>
+            <div class="app-divider-v justify-content-center">
+                <p>{{ __('Or sign up with') }}</p>
+            </div>
+            <div class="col-12">
+                <div class="text-center">
+                    <button type="button" class="btn btn-facebook icon-btn b-r-22 m-1"><i class="ti ti-brand-facebook text-white"></i></button>
+                    <button type="button" class="btn btn-gmail icon-btn b-r-22 m-1"><i class="ti ti-brand-google text-white"></i></button>
+                    <button type="button" class="btn btn-github icon-btn b-r-22 m-1"><i class="ti ti-brand-github text-white"></i></button>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 </x-layouts::auth>
