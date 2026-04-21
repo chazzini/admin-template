@@ -66,7 +66,7 @@
                         </ul>
                     </li>
                     <li><a href="#">To-Do</a></li>
-                    <li><a href="#">Team</a></li>
+{{-- <li><a href="#">Team</a></li> --}}
                     <li><a href="#">API</a></li>
                     <li class="another-level">
                         <a class="" data-bs-toggle="collapse" href="#ticket-page" aria-expanded="false">
