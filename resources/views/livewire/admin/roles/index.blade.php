@@ -62,11 +62,22 @@
 
                 <!-- Roles List Card -->
                 <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">Roles Management</h4>
-                        <button class="btn btn-primary btn-sm" wire:click="create">
-                            <i class="ti ti-plus me-1"></i> Add New Role
-                        </button>
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <h4 class="mb-0">Roles Management</h4>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="app-form app-icon-form">
+                                    <div class="position-relative">
+                                        <input type="search" class="form-control form-control-sm search-filter" 
+                                               placeholder="Search roles..." wire:model.live="search">
+                                        <i class="ti ti-search text-dark"></i>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-sm" wire:click="create">
+                                    <i class="ti ti-plus me-1"></i> Add New Role
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive app-scroll">

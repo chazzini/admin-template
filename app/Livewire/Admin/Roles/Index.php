@@ -13,14 +13,24 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public $search = '';
     public $name, $slug, $description, $selectedPermissions = [];
     public $editingRole = null;
     public $showForm = false;
 
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.admin.roles.index', [
-            'roles' => Role::with('permissions')->latest()->paginate(10),
+            'roles' => Role::with('permissions')
+                ->where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('slug', 'like', '%' . $this->search . '%')
+                ->latest()
+                ->paginate(10),
             'allPermissions' => Permission::all(),
         ])->layout('layouts.admin');
     }

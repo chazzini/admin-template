@@ -12,10 +12,20 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
+    public $search = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.admin.permissions.index', [
-            'permissions' => Permission::latest()->paginate(10),
+            'permissions' => Permission::where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('slug', 'like', '%' . $this->search . '%')
+                ->latest()
+                ->paginate(10),
         ])->layout('layouts.admin');
     }
 }
