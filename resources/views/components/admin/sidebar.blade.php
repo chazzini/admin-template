@@ -26,6 +26,20 @@
                     <li><a href="#">Education</a></li>
                 </ul>
             </li>
+
+            {{-- Access Control Section --}}
+            <li class="menu-title"> <span>Access Control</span></li>
+            <li>
+                <a class="" data-bs-toggle="collapse" href="#rbac" aria-expanded="false">
+                    <i class="ph-duotone ph-shield-check"></i>
+                    RBAC
+                </a>
+                <ul class="collapse shadow-sm" id="rbac">
+                    <li><a href="{{ route('admin.roles.index') }}">Roles Management</a></li>
+                    <li><a href="{{ route('admin.permissions.index') }}">Permissions List</a></li>
+                    <li><a href="{{ route('admin.users.index') }}">User Assignments</a></li>
+                </ul>
+            </li>
             <li>
                 <a class="" data-bs-toggle="collapse" href="#apps" aria-expanded="false">
                     <i class="ph-duotone  ph-stack"></i>
